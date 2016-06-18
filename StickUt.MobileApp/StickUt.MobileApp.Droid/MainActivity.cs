@@ -9,14 +9,17 @@ using Android.OS;
 using SQLite.Net.Platform.XamarinAndroid;
 //using SQLite.Net.Interop;
 using Autofac;
+using Xamarin.Forms.Platform.Android;
 
 namespace StickUt.MobileApp.Droid
 {
-    [Activity(Label = "StickUt.MobileApp", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
+    [Activity(Label = "stickut", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
+            FormsAppCompatActivity.ToolbarResource = Resource.Layout.toolbars;
+            FormsAppCompatActivity.TabLayoutResource = Resource.Layout.tabs;
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
@@ -25,7 +28,7 @@ namespace StickUt.MobileApp.Droid
 
             //App.Platform = _platform;
             App.Init();
-            
+
             //FFImaging initialization
             //CachedImageRenderer.Init();
 
