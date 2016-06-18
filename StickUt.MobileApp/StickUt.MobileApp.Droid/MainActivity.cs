@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net.Interop;
+//using SQLite.Net.Interop;
 using Autofac;
 
 namespace StickUt.MobileApp.Droid
@@ -21,16 +21,16 @@ namespace StickUt.MobileApp.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-            ISQLitePlatform _platform = new SQLitePlatformAndroid();
+            //ISQLitePlatform _platform = new SQLitePlatformAndroid();
 
-            App.Platform = _platform;
+            //App.Platform = _platform;
             App.Init();
             
             //FFImaging initialization
             //CachedImageRenderer.Init();
 
             var newbuilder = new ContainerBuilder();            
-            newbuilder.RegisterInstance(_platform).As<ISQLitePlatform>().SingleInstance();
+            //newbuilder.RegisterInstance(_platform).As<ISQLitePlatform>().SingleInstance();
             //newbuilder.RegisterType<PlatformSpecifics.DatabaseConnectionProvider>().As<IDatabaseConnectionProvider>().SingleInstance();
 
 
