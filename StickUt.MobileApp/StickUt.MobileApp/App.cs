@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using SQLite.Net.Interop;
+using StickUt.MobileApp.Views;
+using StickUt.MobileApp.Views.SettingsView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +19,9 @@ namespace StickUt.MobileApp
 
         public static ApplicationContext Context { get; set; }
         public App()
-        {
-            
+        {     
+            Context = Container.Resolve<ApplicationContext>();                
+            MainPage = Container.Resolve<MasterDetailPage>();
         }
 
         public static void Init()

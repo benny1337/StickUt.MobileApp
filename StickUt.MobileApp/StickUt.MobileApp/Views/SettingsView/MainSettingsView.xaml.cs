@@ -11,7 +11,7 @@ namespace StickUt.MobileApp.Views.SettingsView
     public partial class MainSettingsView : ContentPage
     {
         public MainSettingsView()
-        {
+        {            
             InitializeComponent();
         }
     }

@@ -10,18 +10,17 @@ using Xamarin.Forms;
 namespace StickUt.MobileApp.Views
 {
     public class RootView : MasterDetailPage
-    {
+    {        
         public RootView()
-        {
-            using (var score = App.Container.BeginLifetimeScope())
+        {            
+            using (var scope = App.Container.BeginLifetimeScope())
             {
-                var settings = score.Resolve<MainSettingsView>();
+                var settings = scope.Resolve<MainSettingsView>();
                 Master = settings;
 
-                var details = score.Resolve<StartView>();
-                Master = settings;
-
-                App.Context.Navigation = Detail.Navigation;
+                var detail = scope.Resolve<StartView>();
+                Detail = new ApplicationView(detail);
+                App.Context.Navigation = Detail.Navigation;   
             }            
         }
 
