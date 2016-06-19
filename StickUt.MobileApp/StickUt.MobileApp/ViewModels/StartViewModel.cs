@@ -31,15 +31,17 @@ namespace StickUt.MobileApp.ViewModels
             {
                 return _buttoncmd ?? (_buttoncmd = new Command(() => 
                 {
-                    _dialog.ShowSpinner(() => { _dialog.HideDialog(); });
-
-                    //using (var scope = App.Container.BeginLifetimeScope())
-                    //{
-                    //    var view = scope.Resolve<MainSettingsView>();
-                    //    Debug.WriteLine(view.GetType().ToString());
-                    //    Device.BeginInvokeOnMainThread(async () => 
-                    //    { await App.Context.Navigation.PushAsync(view); });                        
-                    //}                 
+                    _dialog.Toast("klicka", () => 
+                    {
+                        _dialog.HideDialog();
+                        using (var scope = App.Container.BeginLifetimeScope())
+                        {
+                            var view = scope.Resolve<MainSettingsView>();
+                            Debug.WriteLine(view.GetType().ToString());
+                            Device.BeginInvokeOnMainThread(async () =>
+                            { await App.Context.Navigation.PushAsync(view); });
+                        }                        
+                    });
                 }));
             }
         }
