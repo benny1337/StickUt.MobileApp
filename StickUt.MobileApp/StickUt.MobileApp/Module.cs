@@ -8,6 +8,8 @@ using StickUt.MobileApp.Views.SettingsView;
 using StickUt.MobileApp.Views;
 using StickUt.MobileApp.ViewModels;
 using Xamarin.Forms;
+using StickUt.Interface;
+using StickUt.MobileApp.Data;
 
 namespace StickUt.MobileApp
 {
@@ -17,6 +19,7 @@ namespace StickUt.MobileApp
         {
             base.Load(builder);
             builder.RegisterType<ApplicationContext>().SingleInstance().PropertiesAutowired();
+            builder.RegisterType<LocalStorage>().As<ILocalStorage>().SingleInstance();
 
             //viewmodels 
             builder.RegisterType<StartViewModel>();
