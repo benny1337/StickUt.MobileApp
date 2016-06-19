@@ -14,13 +14,16 @@ namespace StickUt.MobileApp.ViewModels
 {
     public class StartViewModel
     {
-        public StartViewModel(ILocalStorage store)
+        public StartViewModel(ILocalStorage store, IUserDialogService dialog)
         {
             _store = store;
+            _dialog = dialog;
         }
 
         private Command _buttoncmd;
         private ILocalStorage _store;
+                
+        private IUserDialogService _dialog;
 
         public Command buttoncmd
         {
@@ -28,13 +31,15 @@ namespace StickUt.MobileApp.ViewModels
             {
                 return _buttoncmd ?? (_buttoncmd = new Command(() => 
                 {
-                    using (var scope = App.Container.BeginLifetimeScope())
-                    {
-                        var view = scope.Resolve<MainSettingsView>();
-                        Debug.WriteLine(view.GetType().ToString());
-                        Device.BeginInvokeOnMainThread(async () => 
-                        { await App.Context.Navigation.PushAsync(view); });                        
-                    }                 
+                    _dialog.ShowSpinner(() => { _dialog.HideDialog(); });
+
+                    //using (var scope = App.Container.BeginLifetimeScope())
+                    //{
+                    //    var view = scope.Resolve<MainSettingsView>();
+                    //    Debug.WriteLine(view.GetType().ToString());
+                    //    Device.BeginInvokeOnMainThread(async () => 
+                    //    { await App.Context.Navigation.PushAsync(view); });                        
+                    //}                 
                 }));
             }
         }

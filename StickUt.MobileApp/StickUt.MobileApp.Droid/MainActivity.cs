@@ -11,6 +11,8 @@ using Autofac;
 using Xamarin.Forms.Platform.Android;
 using SQLite.Net.Interop;
 using StickUt.MobileApp.Data;
+using StickUt.MobileApp.Droid.PlatformSpecifics;
+using StickUt.Interface;
 
 namespace StickUt.MobileApp.Droid
 {
@@ -36,6 +38,7 @@ namespace StickUt.MobileApp.Droid
             var newbuilder = new ContainerBuilder();
             newbuilder.RegisterInstance(_platform).As<ISQLitePlatform>().SingleInstance();
             newbuilder.RegisterType<PlatformSpecifics.DatabaseConnectionProvider>().As<ISQLiteConnectionProvider>().SingleInstance();
+            newbuilder.RegisterType<UserDialogService>().As<IUserDialogService>();
             newbuilder.Update(App.Container);            
             App.Builder = newbuilder;
 
