@@ -37,6 +37,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAuthorize.cs" />
     <Compile Include="ILocalStorage.cs" />
     <Compile Include="IUserDialogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

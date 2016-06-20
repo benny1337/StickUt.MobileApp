@@ -16,7 +16,6 @@ namespace StickUt.MobileApp
         public static IContainer Container { get; set; }
         public static ContainerBuilder Builder { get; set; }
         public static ISQLitePlatform Platform { get; set; }
-
         public static ApplicationContext Context { get; set; }
         public App()
         {     
