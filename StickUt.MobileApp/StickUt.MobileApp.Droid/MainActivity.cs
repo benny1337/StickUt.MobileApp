@@ -20,9 +20,10 @@ namespace StickUt.MobileApp.Droid
     [Activity(Label = "stickut", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity, IAuthorize
     {
+        OAuth2Authenticator auth;
         public void StartAuthorization()
         {
-            var auth = new OAuth2Authenticator(
+            auth = new OAuth2Authenticator(
    clientId: "1729539360643718",   
    scope: "",
    authorizeUrl: new Uri("https://m.facebook.com/dialog/oauth/"),
@@ -34,7 +35,7 @@ namespace StickUt.MobileApp.Droid
 
         private void Auth_Completed(object sender, AuthenticatorCompletedEventArgs e)
         {
-            
+            var x = "";   
         }
 
         protected override void OnCreate(Bundle bundle)
