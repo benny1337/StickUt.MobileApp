@@ -22,7 +22,7 @@ namespace StickUt.MobileApp.ViewModels
 
         private Command _buttoncmd;
         private ILocalStorage _store;
-                
+
         private IUserDialogService _dialog;
 
         public Command buttoncmd
@@ -31,13 +31,10 @@ namespace StickUt.MobileApp.ViewModels
             {
                 return _buttoncmd ?? (_buttoncmd = new Command(() =>
                 {
-                    using (var scope = App.Container.BeginLifetimeScope())
-                    {
-                        var auth = scope.Resolve<IAuthorize>();
-                        auth.StartAuthorization();
-                    };
+                    _dialog.Toast(App.User.UserId);
                 }));
             }
         }
+
     }
 }

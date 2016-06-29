@@ -13,29 +13,24 @@ using SQLite.Net.Interop;
 using StickUt.MobileApp.Data;
 using StickUt.MobileApp.Droid.PlatformSpecifics;
 using StickUt.Interface;
-using Xamarin.Auth;
+using Microsoft.WindowsAzure.MobileServices;
+using System.Threading.Tasks;
+using Android.Util;
 
 namespace StickUt.MobileApp.Droid
 {
     [Activity(Label = "stickut", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity, IAuthorize
     {
-        OAuth2Authenticator auth;
-        public void StartAuthorization()
+        public async Task StartAuthorizationAsync()
         {
-            auth = new OAuth2Authenticator(
-   clientId: "1729539360643718",   
-   scope: "",
-   authorizeUrl: new Uri("https://m.facebook.com/dialog/oauth/"),
-   redirectUrl: new Uri("http://stickutweb20160619103903.azurewebsites.net/"));
-            
-            auth.Completed += Auth_Completed;            
-            StartActivity(auth.GetUI(this));
-        }
-
-        private void Auth_Completed(object sender, AuthenticatorCompletedEventArgs e)
-        {
-            var x = "";   
+            try {
+                var user = await App.Client.LoginAsync(this, MobileServiceAuthenticationProvider.Google);
+                App.User = user;
+            } catch (Exception e)
+            {
+                Log.Warn("auth", e.Message);
+            }
         }
 
         protected override void OnCreate(Bundle bundle)

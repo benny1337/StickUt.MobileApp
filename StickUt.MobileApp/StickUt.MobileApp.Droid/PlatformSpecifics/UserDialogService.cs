@@ -28,6 +28,12 @@ namespace StickUt.MobileApp.Droid.PlatformSpecifics
 
         public void Toast(string message, Action onClick = null)
         {
+            if (onClick == null)
+            {
+                onClick = new Action(() => {
+                    this.HideDialog();
+                });
+            }
             AndHUD.Shared.ShowToast(Xamarin.Forms.Forms.Context, message, clickCallback: onClick);
         }
     }

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace StickUt.Interface
 {
+    public delegate void OnAuthorizationDone();
     public interface IAuthorize
     {
-        void StartAuthorization();
+        Task StartAuthorizationAsync();        
     }
 }
