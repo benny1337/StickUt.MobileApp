@@ -21,6 +21,8 @@ namespace StickUt.MobileApp
             builder.RegisterType<ApplicationContext>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<LocalStorage>().As<ILocalStorage>().SingleInstance();
 
+            builder.RegisterType<CommunicatorBase>();
+
             //viewmodels 
             builder.RegisterType<StartViewModel>();
 

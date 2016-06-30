@@ -6,6 +6,21 @@
   
     >
   <StackLayout>
-    <Button Command="{Binding buttoncmd}" Text="Button1" />
+    <Button Command="{Binding buttoncmd}" Text="Ladda från api" />
+
+    <ListView ItemsSource="{Binding Workouts}">
+      <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <ViewCell.View>
+            <StackLayout>
+              <Label Text="här hade det kunnat stå något" />
+              <Label Text="{Binding WorkoutStatus}" />
+            </StackLayout>            
+          </ViewCell.View>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+    </ListView>
   </StackLayout>
 </ContentPage>

@@ -23,7 +23,13 @@ namespace StickUt.MobileApp.Droid.PlatformSpecifics
 
         public void ShowSpinner(Action onClick = null, string Title = "Arbetar")
         {
-            AndHUD.Shared.Show(Xamarin.Forms.Forms.Context, Title, -1, MaskType.Clear, null, onClick);
+            try
+            {
+                AndHUD.Shared.Show(Xamarin.Forms.Forms.Context, Title, -1, MaskType.Clear, null, onClick);
+            } catch (Exception e)
+            {
+
+            }
         }
 
         public void Toast(string message, Action onClick = null)
