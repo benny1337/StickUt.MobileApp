@@ -15,6 +15,12 @@ namespace StickUt.Model
         Good,
         Great
     }
+
+    public enum WorkoutType
+    {
+        Planned,
+        Unplanned
+    }
     public class Workout:EntityBase
     {
         [PrimaryKey]
@@ -22,5 +28,6 @@ namespace StickUt.Model
         public DateTime StartedOn { get; set; }
         public DateTime EndedOn { get; set; }
         public WorkoutStatus WorkoutStatus { get; set; }
+        public WorkoutType WorkoutType { get; set; }
     }
 }

@@ -14,11 +14,18 @@ namespace StickUt.MobileApp.ViewModels
         private IUserDialogService _dialog;
         private ILocalStorage _store;
         private Workout _workout;
+        public List<WorkoutType> Types {get;set;}
+        public WorkoutType SelectedType { get; set; }
 
         public WorkoutViewModel(IUserDialogService dialog, ILocalStorage store)
         {
             _dialog = dialog;
             _store = store;
+            Types = new List<WorkoutType>()
+            {
+                WorkoutType.Planned,
+                WorkoutType.Unplanned
+            };
 
             MessagingCenter.Subscribe<ViewModelBase, Workout>(this, "WorkoutWasSelected", (sender, w) => 
             {
