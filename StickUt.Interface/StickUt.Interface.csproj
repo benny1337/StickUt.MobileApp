@@ -40,6 +40,8 @@
     <Compile Include="IAuthorize.cs" />
     <Compile Include="ILocalStorage.cs" />
     <Compile Include="IUserDialogService.cs" />
+    <Compile Include="IViewModel.cs" />
+    <Compile Include="IViewWithViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

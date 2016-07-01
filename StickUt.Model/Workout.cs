@@ -10,6 +10,7 @@ namespace StickUt.Model
 {
     public enum WorkoutStatus
     {
+        NotStarted,
         NotGods,
         Good,
         Great

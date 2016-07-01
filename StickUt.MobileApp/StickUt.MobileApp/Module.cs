@@ -10,6 +10,7 @@ using StickUt.MobileApp.ViewModels;
 using Xamarin.Forms;
 using StickUt.Interface;
 using StickUt.MobileApp.Data;
+using StickUt.MobileApp.Data.api;
 
 namespace StickUt.MobileApp
 {
@@ -21,17 +22,21 @@ namespace StickUt.MobileApp
             builder.RegisterType<ApplicationContext>().SingleInstance().PropertiesAutowired();
             builder.RegisterType<LocalStorage>().As<ILocalStorage>().SingleInstance();
 
+            //communicators
             builder.RegisterType<CommunicatorBase>();
+            builder.RegisterType<WorkoutCommunicator>();
 
             //viewmodels 
             builder.RegisterType<StartViewModel>();
+            builder.RegisterType<WorkoutViewModel>();
 
             //views
             builder.RegisterType<RootView>().As<MasterDetailPage>().SingleInstance();
             builder.RegisterType<StartView>();
+            builder.RegisterType<WorkoutView>();
 
             //settings views
-            builder.RegisterType<MainSettingsView>();
+            builder.RegisterType<MainSettingsView>();            
         }
     }
 }

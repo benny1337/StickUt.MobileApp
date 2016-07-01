@@ -12,14 +12,15 @@ using Xamarin.Forms.Xaml;
 namespace StickUt.MobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StartView : ContentPage, IViewWithViewModel
+    public partial class WorkoutView : ContentPage, IViewWithViewModel
     {
         private IViewModel _vm;
-        public StartView(StartViewModel vm)
-        {         
-            InitializeComponent();
+
+        public WorkoutView(WorkoutViewModel vm)
+        {
             _vm = vm;
-            this.BindingContext = vm;
+            InitializeComponent();
+            BindingContext = vm;
         }
 
         public IViewModel GetViewModel()

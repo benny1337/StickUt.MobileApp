@@ -29,12 +29,12 @@ namespace StickUt.MobileApp
 
             if(User == null)
             {
-                Task.Factory.StartNew(async () => 
+                Task.Factory.StartNew(() => 
                 {
                     using (var scope = Container.BeginLifetimeScope())
                     {
                         var auth = scope.Resolve<IAuthorize>();
-                        await auth.StartAuthorizationAsync();
+                        auth.StartAuthorizationAsync();
                     };
                 });
             }

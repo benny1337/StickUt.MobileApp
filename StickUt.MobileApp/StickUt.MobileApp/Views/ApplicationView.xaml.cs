@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StickUt.Interface;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace StickUt.MobileApp.Views
         private void ApplicationView_Popped(object sender, NavigationEventArgs e)
         {
             Debug.WriteLine($"{e.Page.GetType().Name} was popped");
+            var view = sender as IViewWithViewModel;
+            if (view != null)
+                view.GetViewModel().ViewIsDisposing();
         }
     }
 }
