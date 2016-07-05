@@ -23,7 +23,7 @@ namespace StickUt.MobileApp.Views
         private void ApplicationView_Popped(object sender, NavigationEventArgs e)
         {
             Debug.WriteLine($"{e.Page.GetType().Name} was popped");
-            var view = sender as IViewWithViewModel;
+            var view = e.Page as IViewWithViewModel;
             if (view != null)
                 view.GetViewModel().ViewIsDisposing();
         }

@@ -1,10 +1,10 @@
 ﻿using SQLite.Net.Attributes;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 
 namespace StickUt.Model
 {
@@ -21,6 +21,16 @@ namespace StickUt.Model
         Planned,
         Unplanned
     }
+
+    public class WorkoutTypeFriendyNames
+    {
+        public static Dictionary<WorkoutType, string> FriendyNames = new Dictionary<WorkoutType, string>()
+        {
+            { WorkoutType.Planned, "Planerad" },
+            { WorkoutType.Unplanned, "Inte plan" },
+        };
+        
+    }
     public class Workout:EntityBase
     {
         [PrimaryKey]
@@ -29,5 +39,13 @@ namespace StickUt.Model
         public DateTime EndedOn { get; set; }
         public WorkoutStatus WorkoutStatus { get; set; }
         public WorkoutType WorkoutType { get; set; }
+
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public IEnumerable<Exercise> Exercises { get; set; }
+
+        public Workout()
+        {
+            Exercises = new List<Exercise>();                
+        }
     }
 }

@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAuthorize.cs" />
+    <Compile Include="IFriendlyNamesDictionary.cs" />
     <Compile Include="ILocalStorage.cs" />
     <Compile Include="IUserDialogService.cs" />
     <Compile Include="IViewModel.cs" />

@@ -53,29 +53,24 @@ namespace StickUt.MobileApp.ViewModels
         private WorkoutCommunicator _comm;        
         public ObservableCollection<Workout> Workouts { get; set; }
 
-        private Workout _selectedWorkout;
-        public Workout SelectedWorkout
+        private Command<Workout> _workoutSelectedCommand;
+        public Command<Workout> WorkoutSelectedCommand
         {
             get
             {
-                return _selectedWorkout;
-            }
-            set
-            {
-                _selectedWorkout = value;
-                if (_selectedWorkout == null)
-                    return;
-
-                _dialog.ShowSpinner();
-                Task.Factory.StartNew(() =>
+                return _workoutSelectedCommand ?? (_workoutSelectedCommand = new Command<Workout>((w) => 
                 {
-                    using (var scope = App.Container.BeginLifetimeScope())
+                    _dialog.ShowSpinner();
+                    Task.Factory.StartNew(() =>
                     {
-                        var view = scope.Resolve<WorkoutView>();
-                        MessagingCenter.Send<ViewModelBase, Workout>(this, "WorkoutWasSelected", _selectedWorkout);
-                        Device.BeginInvokeOnMainThread(async () => { await App.Context.Navigation.PushAsync(view); });
-                    }
-                });
+                        using (var scope = App.Container.BeginLifetimeScope())
+                        {
+                            var view = scope.Resolve<WorkoutView>();
+                            MessagingCenter.Send<ViewModelBase, Workout>(this, "WorkoutWasSelected", w);
+                            Device.BeginInvokeOnMainThread(async () => { await App.Context.Navigation.PushAsync(view); });
+                        }
+                    });
+                }));
             }
         }
 

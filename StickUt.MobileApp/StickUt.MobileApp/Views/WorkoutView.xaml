@@ -2,8 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StickUt.MobileApp.Views.WorkoutView"
-             xmlns:local-controllers="clr-namespace:StickUt.MobileApp.CustomControls">
+             xmlns:local-controllers="clr-namespace:StickUt.MobileApp.CustomControls"
+             xmlns:converters="clr-namespace:StickUt.MobileApp.Converters">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:ExerciseTypeConverter x:Key="conv" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  
   <StackLayout>
-    <local-controllers:BindablePicker ItemsSource="{Binding Types}"></local-controllers:BindablePicker>
+    <local-controllers:BindablePicker SelectedItem="{Binding SelectedType}" ItemsSource="{Binding Types, Converter={StaticResource conv}}"></local-controllers:BindablePicker>
   </StackLayout>
 </ContentPage>

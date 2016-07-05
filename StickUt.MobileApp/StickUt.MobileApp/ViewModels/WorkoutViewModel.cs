@@ -14,19 +14,33 @@ namespace StickUt.MobileApp.ViewModels
         private IUserDialogService _dialog;
         private ILocalStorage _store;
         private Workout _workout;
-        public List<WorkoutType> Types {get;set;}
-        public WorkoutType SelectedType { get; set; }
+        public List<ExerciseType> Types {get;set;}
+
+        private ExerciseType selectedType;
+        public ExerciseType SelectedType
+        {
+            get
+            {
+                return selectedType;
+            }
+
+            set
+            {
+                selectedType = value;
+                OnPropertyChanged();
+            }
+        }
 
         public WorkoutViewModel(IUserDialogService dialog, ILocalStorage store)
         {
             _dialog = dialog;
             _store = store;
-            Types = new List<WorkoutType>()
+            Task.Factory.StartNew(() => 
             {
-                WorkoutType.Planned,
-                WorkoutType.Unplanned
-            };
-
+                Types = store.GetItems<ExerciseType>().ToList();
+                OnPropertyChanged("Types");
+            });
+            
             MessagingCenter.Subscribe<ViewModelBase, Workout>(this, "WorkoutWasSelected", (sender, w) => 
             {
                 _workout = w;
@@ -36,7 +50,7 @@ namespace StickUt.MobileApp.ViewModels
 
         public override void ViewIsDisposing()
         {
-            
+            MessagingCenter.Unsubscribe<ViewModelBase, Workout>(this, "WorkoutWasSelected");
         }
     }
 }

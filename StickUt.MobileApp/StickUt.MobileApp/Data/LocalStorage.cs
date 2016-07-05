@@ -18,7 +18,11 @@ namespace StickUt.MobileApp.Data
         public LocalStorage(ISQLiteConnectionProvider provider)
         {
             _dataConnection = provider.GetConnection();
-            _dataConnection.CreateTable<Workout>();            
+            _dataConnection.CreateTable<Exercise>();
+            _dataConnection.CreateTable<Workout>();
+            
+            _dataConnection.CreateTable<ExerciseType>();
+            _dataConnection.CreateTable<Set>();
         }
 
         public IEnumerable<T> GetItems<T>() where T : class, new()

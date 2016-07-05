@@ -37,6 +37,10 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="Converters\DictionaryToValueConverter.cs" />
+    <Compile Include="Converters\ExerciseTypeConverter.cs" />
+    <Compile Include="Converters\WorkoutTypeConverter.cs" />
+    <Compile Include="CustomControls\BindableListView.cs" />
     <Compile Include="CustomControls\BindablePicker.cs" />
     <Compile Include="Data\api\WorkoutCommunicator.cs" />
     <Compile Include="Data\CommunicatorBase.cs" />

@@ -3,27 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StickUt.MobileApp.Views.StartView"
              Title="Stickut"
-  
+             xmlns:local-controllers="clr-namespace:StickUt.MobileApp.CustomControls"
     >
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Command="{Binding AddWorkout}" Text="Ny" />
+    <ToolbarItem Command="{Binding AddWorkout}" Icon="ic_add_white_48dp.png" />
   </ContentPage.ToolbarItems>
   
   <StackLayout>
-    <ListView ItemsSource="{Binding Workouts}" HasUnevenRows="true" SelectedItem="{Binding SelectedWorkout}">
+
+    <local-controllers:BindableListView ItemsSource="{Binding Workouts}" ItemClickedCommand="{Binding WorkoutSelectedCommand}" HasUnevenRows="true"
+                                        Style="{DynamicResource ListItemSeparator}">
+      <x:Arguments>
+        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+      </x:Arguments>
       <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <ViewCell.View>
+        <DataTemplate>
+          <ViewCell x:Name="viewcell">
+            <ViewCell.ContextActions>             
+              <MenuItem Text="Ta bort aktivitet" Command="{Binding RemoveWorkoutCommand}" IsDestructive="True" />
+            </ViewCell.ContextActions>
             <StackLayout>
               <Label Text="{Binding CreatedOn}" />
               <Label Text="{Binding WorkoutStatus}" />
             </StackLayout>
-          </ViewCell.View>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    </ListView>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </local-controllers:BindableListView>
   </StackLayout>
 </ContentPage>
