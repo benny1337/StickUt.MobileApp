@@ -25,6 +25,7 @@ namespace StickUt.MobileApp
             //communicators
             builder.RegisterType<CommunicatorBase>();
             builder.RegisterType<WorkoutCommunicator>();
+            builder.RegisterType<ExerciseCommunicator>();
 
             //viewmodels 
             builder.RegisterType<StartViewModel>();

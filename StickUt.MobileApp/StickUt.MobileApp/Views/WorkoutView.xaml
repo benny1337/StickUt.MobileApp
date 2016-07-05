@@ -5,6 +5,10 @@
              xmlns:local-controllers="clr-namespace:StickUt.MobileApp.CustomControls"
              xmlns:converters="clr-namespace:StickUt.MobileApp.Converters">
 
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Command="{Binding AddExercise}" Icon="ic_add_white_48dp.png" />
+  </ContentPage.ToolbarItems>
+
   <ContentPage.Resources>
     <ResourceDictionary>
       <converters:ExerciseTypeConverter x:Key="conv" />
@@ -12,6 +16,25 @@
   </ContentPage.Resources>
   
   <StackLayout>
+    <local-controllers:BindableListView ItemsSource="{Binding Exercises}" ItemClickedCommand="{Binding ExerciseSelectedCommand}" HasUnevenRows="true"
+                                        Style="{DynamicResource ListItemSeparator}">
+      <x:Arguments>
+        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+      </x:Arguments>
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell x:Name="viewcell">
+            <ViewCell.ContextActions>
+              <MenuItem Text="Ta bort övning" Command="{Binding RemoveExerciseCommand}" IsDestructive="True" />
+            </ViewCell.ContextActions>
+            <StackLayout>              
+              <Label Text="{Binding SetAndRepsLabel}" />
+            </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </local-controllers:BindableListView>
+
     <local-controllers:BindablePicker SelectedItem="{Binding SelectedType}" ItemsSource="{Binding Types, Converter={StaticResource conv}}"></local-controllers:BindablePicker>
   </StackLayout>
 </ContentPage>

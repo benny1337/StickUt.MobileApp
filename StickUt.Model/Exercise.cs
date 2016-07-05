@@ -29,6 +29,15 @@ namespace StickUt.Model
         [ForeignKey(typeof(ExerciseType))]
         public Guid ExerciseTypeId { get; set; }
 
+        public string SetAndRepsLabel
+        {
+            get
+            {
+                if (Sets.Count() == 0) return "0 set";
+                return $"{Sets.Count()} x " + Sets.Average(x => x.Reps);
+            }
+        }
+
         public Exercise()
         {
             Sets = new List<Set>();
