@@ -3,12 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StickUt.MobileApp.Views.WorkoutView"
              xmlns:local-controllers="clr-namespace:StickUt.MobileApp.CustomControls"
-             xmlns:converters="clr-namespace:StickUt.MobileApp.Converters">
-
-  <ContentPage.ToolbarItems>
-    <ToolbarItem Command="{Binding AddExercise}" Icon="ic_add_white_48dp.png" />
-  </ContentPage.ToolbarItems>
-
+             xmlns:converters="clr-namespace:StickUt.MobileApp.Converters"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+  
   <ContentPage.Resources>
     <ResourceDictionary>
       <converters:ExerciseTypeConverter x:Key="conv" />
@@ -21,20 +18,35 @@
       <x:Arguments>
         <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
       </x:Arguments>
+      <ListView.HeaderTemplate>
+        <DataTemplate>
+          <StackLayout>
+            <Label Text="?====" />
+          </StackLayout>
+        </DataTemplate>
+      </ListView.HeaderTemplate>
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell x:Name="viewcell">
             <ViewCell.ContextActions>
               <MenuItem Text="Ta bort övning" Command="{Binding RemoveExerciseCommand}" IsDestructive="True" />
             </ViewCell.ContextActions>
-            <StackLayout>              
+            <StackLayout>
+              <Label Text="{Binding ExerciseType, Converter={StaticResource conv}}" />
               <Label Text="{Binding SetAndRepsLabel}" />
             </StackLayout>
           </ViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>
     </local-controllers:BindableListView>
-
-    <local-controllers:BindablePicker SelectedItem="{Binding SelectedType}" ItemsSource="{Binding Types, Converter={StaticResource conv}}"></local-controllers:BindablePicker>
+        
+    <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+      <local-controllers:BindablePicker HorizontalOptions="FillAndExpand" SelectedIndex="{Binding SelectedTypeIndex}" ItemsSource="{Binding Types, Converter={StaticResource conv}}"></local-controllers:BindablePicker>
+      <ffimageloading:CachedImage Source="ic_add_circle_black_48dp.png" VerticalOptions="FillAndExpand" HorizontalOptions="End" HeightRequest="35" WidthRequest="35">
+        <Image.GestureRecognizers>
+          <TapGestureRecognizer	Command="{Binding AddExercise}"/>
+        </Image.GestureRecognizers>
+      </ffimageloading:CachedImage>      
+    </StackLayout>
   </StackLayout>
 </ContentPage>

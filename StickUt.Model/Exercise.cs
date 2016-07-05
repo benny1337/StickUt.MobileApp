@@ -36,7 +36,7 @@ namespace StickUt.Model
                 if (Sets.Count() == 0) return "0 set";
                 return $"{Sets.Count()} x " + Sets.Average(x => x.Reps);
             }
-        }
+        }       
 
         public Exercise()
         {

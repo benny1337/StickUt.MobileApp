@@ -13,11 +13,18 @@ namespace StickUt.MobileApp.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var types = value as List<ExerciseType>;
-            if (types == null)
-                return value;
+            if(value.GetType().Equals(typeof(ExerciseType)))
+            {
+                return ((ExerciseType)value).Name;
+            }
+            else
+            {
+                var types = value as List<ExerciseType>;
+                if (types == null)
+                    return value;
 
-            return types.Select(x => x.Name).ToList();
+                return types.Select(x => x.Name).ToList();
+            }            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

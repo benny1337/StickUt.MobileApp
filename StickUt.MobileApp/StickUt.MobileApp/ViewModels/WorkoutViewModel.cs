@@ -39,22 +39,29 @@ namespace StickUt.MobileApp.ViewModels
         private ILocalStorage _store;
         private Workout _workout;
         public List<ExerciseType> Types { get; set; }
+        private ExerciseType _selectedType;
 
-        private ExerciseType selectedType;
-        public ExerciseType SelectedType
+        private int _selectedTypeIndex;        
+        public int SelectedTypeIndex
         {
             get
             {
-                return selectedType;
+                return _selectedTypeIndex;
             }
 
             set
             {
-                selectedType = value;
+                _selectedTypeIndex = value;
+                if (_selectedTypeIndex == -1)
+                    _selectedType = null;
+                else
+                    _selectedType = Types[value];         
                 OnPropertyChanged();
             }
         }
 
+        private Command<Exercise> removeExerciseCommand;
+        private Command<Exercise> exerciseSelectedCommand;
         private Command addExercise;
 
         public List<Exercise> Exercises
@@ -77,15 +84,43 @@ namespace StickUt.MobileApp.ViewModels
             {
                 return addExercise ?? (addExercise = new Command(() => 
                 {
+                    if(_selectedType == null)
+                    {
+                        _dialog.Toast("Typ av övning måste väljas");
+                        return;
+                    }
                     var e = new Exercise()
                     {
-                        ExerciseType = SelectedType,
+                        ExerciseTypeId = _selectedType.Id,
                         WorkoutId = _workout.Id,
                         Id = Guid.NewGuid()
                     };
                     _store.Insert<Exercise>(e);
                     Exercises.Add(e);
-                    OnPropertyChanged("Exercises");
+                    Exercises = Exercises;
+                    SelectedTypeIndex = -1;                    
+                }));
+            }            
+        }
+
+        public Command<Exercise> RemoveExerciseCommand
+        {
+            get
+            {
+                return removeExerciseCommand ?? (removeExerciseCommand = new Command<Exercise>((e) => 
+                {
+
+                }));
+            }            
+        }
+
+        public Command<Exercise> ExerciseSelectedCommand
+        {
+            get
+            {
+                return exerciseSelectedCommand ?? (exerciseSelectedCommand = new Command<Exercise>((e) => 
+                {
+
                 }));
             }            
         }

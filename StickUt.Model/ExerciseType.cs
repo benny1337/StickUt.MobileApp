@@ -17,6 +17,6 @@ namespace StickUt.Model
         public ExerciseType()
         {
             Exercises = new List<Exercise>();                
-        }
+        }        
     }
 }

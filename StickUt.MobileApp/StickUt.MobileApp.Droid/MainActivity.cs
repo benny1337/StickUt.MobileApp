@@ -16,6 +16,7 @@ using StickUt.Interface;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
 using Android.Util;
+using FFImageLoading.Forms.Droid;
 
 namespace StickUt.MobileApp.Droid
 {
@@ -47,7 +48,7 @@ namespace StickUt.MobileApp.Droid
             App.Init();
 
             //FFImaging initialization
-            //CachedImageRenderer.Init();
+            CachedImageRenderer.Init();            
 
             var newbuilder = new ContainerBuilder();
             newbuilder.RegisterInstance(_platform).As<ISQLitePlatform>().SingleInstance();
